@@ -43,11 +43,15 @@ docker-push-latest:
 	@[ -z "${REGISTRY_NAMESPACE}" ] && echo 'missing $$REGISTRY_NAMESPACE' || \
 	docker push ${REGISTRY_NAMESPACE}/${CARGO_PACKAGE_NAME}:latest
 
+# @TODO warn if helm is not yet installed
+helm-dist:
+	mkdir -p ${HELM_DIST}
+
 helm-login:
 	helm registry login ${REGISTRY_HOSTNAME}
 
 # build helm package into the ./helm-dist directory
-helm-package:
+helm-package: helm-dist
 	helm package helm/${CARGO_PACKAGE_NAME} -d ${HELM_DIST}
 
 #####################################################################
