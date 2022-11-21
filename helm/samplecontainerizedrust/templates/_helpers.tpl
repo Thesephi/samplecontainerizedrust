@@ -48,6 +48,8 @@ Selector labels
 {{- define "samplecontainerizedrust.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "samplecontainerizedrust.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ include "samplecontainerizedrust.name" . }}
+version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 
 {{/*
